@@ -75,46 +75,15 @@
     a { color: #007aff; text-decoration: none; }
     a:hover { text-decoration: underline; }
     .lang-wrap { position: relative; flex-shrink: 0; }
-    .lang-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 1.2rem;
-      padding: 4px 2px;
-      line-height: 1;
-      opacity: 0.5;
-      transition: opacity 0.15s;
-    }
-    .lang-btn:hover { opacity: 0.9; }
-    .lang-menu {
-      display: none;
-      position: absolute;
-      bottom: calc(100% + 8px);
-      right: 0;
-      background: #ffffff;
-      border: 1px solid #e5e5ea;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
-      overflow: hidden;
-      min-width: 170px;
-      z-index: 10;
-    }
-    .lang-menu.open { display: block; }
-    .lang-menu button {
-      display: block;
-      width: 100%;
-      background: none;
-      border: none;
-      text-align: left;
-      padding: 9px 16px;
-      font-size: 0.8125rem;
+    .lang-select {
+      font-size: 0.75rem;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: #1c1c1e;
+      color: #6e6e73;
+      background: none;
+      border: none;
       cursor: pointer;
-      letter-spacing: 0.012em;
+      outline: none;
     }
-    .lang-menu button:hover { background: #f2f2f7; }
-    .lang-menu button.active { color: #007aff; font-weight: 500; }
 
     @media (prefers-color-scheme: dark) {
       body { background: #1c1c1e; color: #f2f2f7; }
@@ -127,10 +96,7 @@
       .footer-contact { color: #e5e5ea; }
       .updated { color: #98989d; }
       a { color: #0a84ff; }
-      .lang-menu { background: #2c2c2e; border-color: #3a3a3c; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
-      .lang-menu button { color: #f2f2f7; }
-      .lang-menu button:hover { background: #3a3a3c; }
-      .lang-menu button.active { color: #0a84ff; }
+      .lang-select { color: #98989d; }
     }
   </style>
 </head>
@@ -153,29 +119,26 @@
         <div class="footer-contact"><a href="mailto:swift.marcio@pm.me">swift.marcio@pm.me</a></div>
         <span class="updated" id="updated-date">16 March 2026</span>
       </div>
-      <div class="lang-wrap">
-        <button class="lang-btn" onclick="toggleLangMenu()">🌐</button>
-        <div class="lang-menu" id="langMenu">
-          <button onclick="setLang('en')" data-lang="en" class="active">English</button>
-          <button onclick="setLang('de')" data-lang="de">Deutsch</button>
-          <button onclick="setLang('es')" data-lang="es">Español</button>
-          <button onclick="setLang('fr')" data-lang="fr">Français</button>
-          <button onclick="setLang('it')" data-lang="it">Italiano</button>
-          <button onclick="setLang('pt')" data-lang="pt">Português (PT)</button>
-          <button onclick="setLang('pt-br')" data-lang="pt-br">Português (BR)</button>
-          <button onclick="setLang('nl')" data-lang="nl">Nederlands</button>
-          <button onclick="setLang('hr')" data-lang="hr">Hrvatski</button>
-          <button onclick="setLang('tr')" data-lang="tr">Türkçe</button>
-          <button onclick="setLang('ru')" data-lang="ru">Русский</button>
-          <button onclick="setLang('ar')" data-lang="ar">العربية</button>
-          <button onclick="setLang('fa')" data-lang="fa">فارسی</button>
-          <button onclick="setLang('hi')" data-lang="hi">हिन्दी</button>
-          <button onclick="setLang('zh')" data-lang="zh">中文（简体）</button>
-          <button onclick="setLang('zh-tw')" data-lang="zh-tw">中文（繁體）</button>
-          <button onclick="setLang('ja')" data-lang="ja">日本語</button>
-          <button onclick="setLang('ko')" data-lang="ko">한국어</button>
-        </div>
-      </div>
+      <select class="lang-select" id="langSelect" onchange="setLang(this.value)">
+        <option value="en">English</option>
+        <option value="de">Deutsch</option>
+        <option value="es">Español</option>
+        <option value="fr">Français</option>
+        <option value="it">Italiano</option>
+        <option value="pt">Português (PT)</option>
+        <option value="pt-br">Português (BR)</option>
+        <option value="nl">Nederlands</option>
+        <option value="hr">Hrvatski</option>
+        <option value="tr">Türkçe</option>
+        <option value="ru">Русский</option>
+        <option value="ar">العربية</option>
+        <option value="fa">فارسی</option>
+        <option value="hi">हिन्दी</option>
+        <option value="zh">中文（简体）</option>
+        <option value="zh-tw">中文（繁體）</option>
+        <option value="ja">日本語</option>
+        <option value="ko">한국어</option>
+      </select>
     </div>
   </div>
   <script>
@@ -200,10 +163,6 @@
       'zh-tw': { dir:'ltr', title:'隱私政策', p1:'whatAcountry不收集、分享或出售任何個人資料。', p2:'所有問答進度和設定均儲存在您的裝置本機。', p3:'所有國家資料直接內建於應用程式中並離線載入。', p4:'地圖圖磚僅從Apple地圖和OpenStreetMap載入用於顯示目的。不傳輸任何使用者資料。', p5:'此應用程式不使用任何分析、廣告SDK或任何形式的追蹤。', date:'2026年3月16日' }
     };
 
-    function toggleLangMenu() {
-      document.getElementById('langMenu').classList.toggle('open');
-    }
-
     function setLang(code) {
       const t = T[code];
       document.getElementById('doc-title').textContent = t.title;
@@ -214,17 +173,8 @@
       document.getElementById('p5').textContent = t.p5;
       document.getElementById('updated-date').textContent = t.date;
       document.querySelector('.card').setAttribute('dir', t.dir);
-      document.getElementById('langMenu').classList.remove('open');
-      document.querySelectorAll('.lang-menu button').forEach(b => {
-        b.classList.toggle('active', b.dataset.lang === code);
-      });
+      document.getElementById('langSelect').value = code;
     }
-
-    document.addEventListener('click', function(e) {
-      if (!e.target.closest('.lang-wrap')) {
-        document.getElementById('langMenu').classList.remove('open');
-      }
-    });
 
     (function() {
       const full = (navigator.language || 'en').toLowerCase();
