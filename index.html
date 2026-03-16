@@ -65,9 +65,12 @@
       margin-top: 16px;
       padding-top: 16px;
       border-top: 1px solid #e5e5ea;
+    }
+    .footer-bottom {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      margin-top: 6px;
     }
     .footer-contact { font-size: 0.8125rem; font-weight: 400; letter-spacing: 0.016em; margin-bottom: 6px; }
     .footer-contact a { color: #007aff; }
@@ -115,11 +118,10 @@
     <p id="p4">Map tiles are loaded from Apple Maps and OpenStreetMap for display only. No user data is transmitted.</p>
     <p id="p5">The app does not use analytics, advertising SDKs, or tracking of any kind.</p>
     <div class="footer">
-      <div>
-        <div class="footer-contact"><a href="mailto:swift.marcio@pm.me">swift.marcio@pm.me</a></div>
+      <div class="footer-contact"><a href="mailto:swift.marcio@pm.me">swift.marcio@pm.me</a></div>
+      <div class="footer-bottom">
         <span class="updated" id="updated-date">16 March 2026</span>
-      </div>
-      <select class="lang-select" id="langSelect" onchange="setLang(this.value)">
+        <select class="lang-select" id="langSelect" onchange="setLang(this.value)">
         <option value="en">English</option>
         <option value="de">Deutsch</option>
         <option value="es">Español</option>
@@ -139,6 +141,7 @@
         <option value="ja">日本語</option>
         <option value="ko">한국어</option>
       </select>
+      </div>
     </div>
   </div>
   <script>
