@@ -65,12 +65,56 @@
       margin-top: 16px;
       padding-top: 16px;
       border-top: 1px solid #e5e5ea;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
     .footer-contact { font-size: 0.8125rem; font-weight: 400; letter-spacing: 0.016em; margin-bottom: 6px; }
     .footer-contact a { color: #007aff; }
     .updated { color: #6e6e73; font-size: 0.6875rem; font-weight: 300; letter-spacing: 0.016em; }
     a { color: #007aff; text-decoration: none; }
     a:hover { text-decoration: underline; }
+    .lang-wrap { position: relative; flex-shrink: 0; }
+    .lang-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 4px 2px;
+      line-height: 1;
+      opacity: 0.5;
+      transition: opacity 0.15s;
+    }
+    .lang-btn:hover { opacity: 0.9; }
+    .lang-menu {
+      display: none;
+      position: absolute;
+      bottom: calc(100% + 8px);
+      right: 0;
+      background: #ffffff;
+      border: 1px solid #e5e5ea;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+      overflow: hidden;
+      min-width: 170px;
+      z-index: 10;
+    }
+    .lang-menu.open { display: block; }
+    .lang-menu button {
+      display: block;
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      padding: 9px 16px;
+      font-size: 0.8125rem;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #1c1c1e;
+      cursor: pointer;
+      letter-spacing: 0.012em;
+    }
+    .lang-menu button:hover { background: #f2f2f7; }
+    .lang-menu button.active { color: #007aff; font-weight: 500; }
 
     @media (prefers-color-scheme: dark) {
       body { background: #1c1c1e; color: #f2f2f7; }
@@ -83,6 +127,10 @@
       .footer-contact { color: #e5e5ea; }
       .updated { color: #98989d; }
       a { color: #0a84ff; }
+      .lang-menu { background: #2c2c2e; border-color: #3a3a3c; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+      .lang-menu button { color: #f2f2f7; }
+      .lang-menu button:hover { background: #3a3a3c; }
+      .lang-menu button.active { color: #0a84ff; }
     }
   </style>
 </head>
@@ -92,18 +140,99 @@
       <img src="data:image/png;base64,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" alt="whatAcountry icon">
       <div>
         <div class="app-name">whatAcountry</div>
-        <div class="doc-title">Privacy Policy</div>
+        <div class="doc-title" id="doc-title">Privacy Policy</div>
       </div>
     </div>
-    <p>whatAcountry does not collect, share, or sell any personal data.</p>
-    <p>All game progress and settings are stored locally on your device.</p>
-    <p>All country data is bundled directly within the app and loaded offline.</p>
-    <p>Map tiles are loaded from Apple Maps and OpenStreetMap for display only. No user data is transmitted.</p>
-    <p>The app does not use analytics, advertising SDKs, or tracking of any kind.</p>
+    <p id="p1">whatAcountry does not collect, share, or sell any personal data.</p>
+    <p id="p2">All quiz progress and settings are stored locally on your device.</p>
+    <p id="p3">All country data is bundled directly within the app and loaded offline.</p>
+    <p id="p4">Map tiles are loaded from Apple Maps and OpenStreetMap for display only. No user data is transmitted.</p>
+    <p id="p5">The app does not use analytics, advertising SDKs, or tracking of any kind.</p>
     <div class="footer">
-      <div class="footer-contact"><a href="mailto:swift.marcio@pm.me">swift.marcio@pm.me</a></div>
-      <span class="updated">16 March 2026</span>
+      <div>
+        <div class="footer-contact"><a href="mailto:swift.marcio@pm.me">swift.marcio@pm.me</a></div>
+        <span class="updated" id="updated-date">16 March 2026</span>
+      </div>
+      <div class="lang-wrap">
+        <button class="lang-btn" onclick="toggleLangMenu()">🌐</button>
+        <div class="lang-menu" id="langMenu">
+          <button onclick="setLang('en')" data-lang="en" class="active">English</button>
+          <button onclick="setLang('de')" data-lang="de">Deutsch</button>
+          <button onclick="setLang('es')" data-lang="es">Español</button>
+          <button onclick="setLang('fr')" data-lang="fr">Français</button>
+          <button onclick="setLang('it')" data-lang="it">Italiano</button>
+          <button onclick="setLang('pt')" data-lang="pt">Português (PT)</button>
+          <button onclick="setLang('pt-br')" data-lang="pt-br">Português (BR)</button>
+          <button onclick="setLang('nl')" data-lang="nl">Nederlands</button>
+          <button onclick="setLang('hr')" data-lang="hr">Hrvatski</button>
+          <button onclick="setLang('tr')" data-lang="tr">Türkçe</button>
+          <button onclick="setLang('ru')" data-lang="ru">Русский</button>
+          <button onclick="setLang('ar')" data-lang="ar">العربية</button>
+          <button onclick="setLang('fa')" data-lang="fa">فارسی</button>
+          <button onclick="setLang('hi')" data-lang="hi">हिन्दी</button>
+          <button onclick="setLang('zh')" data-lang="zh">中文（简体）</button>
+          <button onclick="setLang('zh-tw')" data-lang="zh-tw">中文（繁體）</button>
+          <button onclick="setLang('ja')" data-lang="ja">日本語</button>
+          <button onclick="setLang('ko')" data-lang="ko">한국어</button>
+        </div>
+      </div>
     </div>
   </div>
+  <script>
+    const T = {
+      en: { dir:'ltr', title:'Privacy Policy', p1:'whatAcountry does not collect, share, or sell any personal data.', p2:'All quiz progress and settings are stored locally on your device.', p3:'All country data is bundled directly within the app and loaded offline.', p4:'Map tiles are loaded from Apple Maps and OpenStreetMap for display only. No user data is transmitted.', p5:'The app does not use analytics, advertising SDKs, or tracking of any kind.', date:'16 March 2026' },
+      de: { dir:'ltr', title:'Datenschutzerklärung', p1:'whatAcountry erfasst, teilt oder verkauft keine personenbezogenen Daten.', p2:'Alle Quiz-Fortschritte und Einstellungen werden lokal auf Ihrem Gerät gespeichert.', p3:'Alle Länderdaten sind direkt in der App enthalten und werden offline geladen.', p4:'Kartenkacheln werden nur zur Anzeige von Apple Maps und OpenStreetMap geladen. Es werden keine Nutzerdaten übermittelt.', p5:'Die App verwendet keinerlei Analysen, Werbe-SDKs oder Tracking.', date:'16. März 2026' },
+      es: { dir:'ltr', title:'Política de privacidad', p1:'whatAcountry no recopila, comparte ni vende ningún dato personal.', p2:'Todo el progreso del cuestionario y la configuración se almacenan localmente en su dispositivo.', p3:'Todos los datos de países están integrados directamente en la aplicación y se cargan sin conexión.', p4:'Los mosaicos de mapa se cargan desde Apple Maps y OpenStreetMap solo para visualización. No se transmiten datos del usuario.', p5:'La aplicación no utiliza análisis, SDKs publicitarios ni seguimiento de ningún tipo.', date:'16 de marzo de 2026' },
+      fr: { dir:'ltr', title:'Politique de confidentialité', p1:"whatAcountry ne collecte, ne partage ni ne vend aucune donnée personnelle.", p2:'Toute la progression du quiz et les paramètres sont stockés localement sur votre appareil.', p3:"Toutes les données sur les pays sont intégrées directement dans l'application et chargées hors ligne.", p4:"Les tuiles de carte sont chargées depuis Apple Maps et OpenStreetMap uniquement pour l'affichage. Aucune donnée utilisateur n'est transmise.", p5:"L'application n'utilise aucune analyse, SDK publicitaire ou suivi d'aucune sorte.", date:'16 mars 2026' },
+      it: { dir:'ltr', title:'Informativa sulla privacy', p1:'whatAcountry non raccoglie, condivide né vende alcun dato personale.', p2:'Tutti i progressi del quiz e le impostazioni sono memorizzati localmente sul dispositivo.', p3:"Tutti i dati sui paesi sono integrati direttamente nell'app e caricati offline.", p4:'Le tessere mappa vengono caricate da Apple Maps e OpenStreetMap solo per la visualizzazione. Nessun dato utente viene trasmesso.', p5:'L\'app non utilizza analisi, SDK pubblicitari né alcun tipo di tracciamento.', date:'16 marzo 2026' },
+      pt: { dir:'ltr', title:'Política de Privacidade', p1:'whatAcountry não recolhe, partilha nem vende quaisquer dados pessoais.', p2:'Todo o progresso do questionário e as definições são guardados localmente no seu dispositivo.', p3:'Todos os dados de países estão integrados diretamente na aplicação e carregados offline.', p4:'Os mosaicos do mapa são carregados a partir do Apple Maps e do OpenStreetMap apenas para visualização. Nenhum dado do utilizador é transmitido.', p5:'A aplicação não utiliza análises, SDKs de publicidade ou rastreio de qualquer tipo.', date:'16 de março de 2026' },
+      nl: { dir:'ltr', title:'Privacybeleid', p1:'whatAcountry verzamelt, deelt noch verkoopt persoonlijke gegevens.', p2:'Alle quizvoortgang en instellingen worden lokaal op uw apparaat opgeslagen.', p3:'Alle landengegevens zijn rechtstreeks in de app opgenomen en worden offline geladen.', p4:'Kaarttegels worden alleen voor weergave geladen van Apple Maps en OpenStreetMap. Er worden geen gebruikersgegevens verzonden.', p5:"De app maakt geen gebruik van analyses, reclame-SDK's of enige vorm van tracking.", date:'16 maart 2026' },
+      hr: { dir:'ltr', title:'Pravila privatnosti', p1:'whatAcountry ne prikuplja, ne dijeli niti prodaje nikakve osobne podatke.', p2:'Sav napredak kviza i postavke pohranjeni su lokalno na vašem uređaju.', p3:'Svi podaci o zemljama integrirani su izravno u aplikaciju i učitavaju se izvan mreže.', p4:'Pločice karte učitavaju se iz Apple Mapsa i OpenStreetMapa samo za prikaz. Nikakvi korisnički podaci se ne prenose.', p5:'Aplikacija ne koristi nikakvu analitiku, reklamne SDK-ove ni praćenje bilo koje vrste.', date:'16. ožujka 2026.' },
+      tr: { dir:'ltr', title:'Gizlilik Politikası', p1:'whatAcountry hiçbir kişisel veri toplamaz, paylaşmaz veya satmaz.', p2:'Tüm test ilerlemeniz ve ayarlarınız cihazınızda yerel olarak depolanır.', p3:'Tüm ülke verileri doğrudan uygulamaya dahil edilmiştir ve çevrimdışı yüklenir.', p4:"Harita karoları yalnızca görüntüleme amacıyla Apple Maps ve OpenStreetMap'ten yüklenir. Hiçbir kullanıcı verisi iletilmez.", p5:"Uygulama hiçbir analiz, reklam SDK'sı veya herhangi bir türde izleme kullanmaz.", date:'16 Mart 2026' },
+      ru: { dir:'ltr', title:'Политика конфиденциальности', p1:'whatAcountry не собирает, не передаёт и не продаёт личные данные.', p2:'Весь прогресс викторины и настройки хранятся локально на вашем устройстве.', p3:'Все данные о странах встроены непосредственно в приложение и загружаются в автономном режиме.', p4:'Тайлы карт загружаются из Карты Apple и OpenStreetMap только для отображения. Данные пользователя не передаются.', p5:'Приложение не использует аналитику, рекламные SDK или отслеживание какого-либо рода.', date:'16 марта 2026 г.' },
+      ar: { dir:'rtl', title:'سياسة الخصوصية', p1:'لا تجمع whatAcountry أي بيانات شخصية أو تشاركها أو تبيعها.', p2:'يتم تخزين جميع تقدم الاختبار والإعدادات محليًا على جهازك.', p3:'يتم تضمين جميع بيانات البلدان مباشرةً في التطبيق وتحميلها دون اتصال.', p4:'يتم تحميل بلاطات الخريطة من خرائط Apple وOpenStreetMap لأغراض العرض فقط. لا يتم نقل أي بيانات مستخدم.', p5:'لا يستخدم التطبيق أي تحليلات أو SDKs إعلانية أو تتبعًا من أي نوع.', date:'16 مارس 2026' },
+      fa: { dir:'rtl', title:'سیاست حریم خصوصی', p1:'whatAcountry هیچ داده شخصی را جمع‌آوری، به اشتراک نمی‌گذارد یا نمی‌فروشد.', p2:'تمام پیشرفت آزمون و تنظیمات به صورت محلی در دستگاه شما ذخیره می‌شود.', p3:'تمام داده‌های کشور مستقیماً در برنامه تعبیه شده و به صورت آفلاین بارگذاری می‌شود.', p4:'کاشی‌های نقشه فقط برای نمایش از Apple Maps و OpenStreetMap بارگذاری می‌شوند. هیچ داده کاربری منتقل نمی‌شود.', p5:'برنامه از هیچ‌گونه تجزیه‌وتحلیل، SDK تبلیغاتی یا ردیابی استفاده نمی‌کند.', date:'۱۶ مارس ۲۰۲۶' },
+      hi: { dir:'ltr', title:'गोपनीयता नीति', p1:'whatAcountry कोई भी व्यक्तिगत डेटा एकत्र, साझा या बेचता नहीं है।', p2:'सभी क्विज़ प्रगति और सेटिंग्स आपके डिवाइस पर स्थानीय रूप से संग्रहीत हैं।', p3:'सभी देश डेटा सीधे ऐप में बंडल किया गया है और ऑफ़लाइन लोड होता है।', p4:'मानचित्र टाइलें केवल प्रदर्शन के लिए Apple Maps और OpenStreetMap से लोड की जाती हैं। कोई उपयोगकर्ता डेटा प्रसारित नहीं होता।', p5:'ऐप किसी भी प्रकार के विश्लेषण, विज्ञापन SDK या ट्रैकिंग का उपयोग नहीं करता।', date:'16 मार्च 2026' },
+      zh: { dir:'ltr', title:'隐私政策', p1:'whatAcountry不收集、共享或出售任何个人数据。', p2:'所有问答进度和设置均存储在您的设备本地。', p3:'所有国家数据直接内置于应用程序中并离线加载。', p4:'地图图块仅从Apple地图和OpenStreetMap加载用于显示目的。不传输任何用户数据。', p5:'该应用不使用任何分析、广告SDK或任何形式的跟踪。', date:'2026年3月16日' },
+      ja: { dir:'ltr', title:'プライバシーポリシー', p1:'whatAcountryは個人データの収集、共有、販売を一切行いません。', p2:'すべてのクイズの進行状況と設定は、デバイスにローカルで保存されます。', p3:'すべての国データはアプリに直接バンドルされており、オフラインで読み込まれます。', p4:'マップタイルはApple マップとOpenStreetMapから表示目的のみで読み込まれます。ユーザーデータは送信されません。', p5:'アプリは分析、広告SDK、いかなる種類のトラッキングも使用しません。', date:'2026年3月16日' },
+      ko: { dir:'ltr', title:'개인정보 처리방침', p1:'whatAcountry는 개인 데이터를 수집, 공유 또는 판매하지 않습니다.', p2:'모든 퀴즈 진행 상황과 설정은 기기에 로컬로 저장됩니다.', p3:'모든 국가 데이터는 앱에 직접 번들로 제공되며 오프라인으로 로드됩니다.', p4:'지도 타일은 표시 목적으로만 Apple 지도와 OpenStreetMap에서 로드됩니다. 사용자 데이터는 전송되지 않습니다.', p5:'앱은 분석, 광고 SDK 또는 어떠한 종류의 추적도 사용하지 않습니다.', date:'2026년 3월 16일' },
+      'pt-br': { dir:'ltr', title:'Política de Privacidade', p1:'whatAcountry não coleta, compartilha nem vende nenhum dado pessoal.', p2:'Todo o progresso do questionário e as configurações são armazenados localmente no seu dispositivo.', p3:'Todos os dados de países estão integrados diretamente no aplicativo e carregados offline.', p4:'Os blocos de mapa são carregados do Apple Maps e do OpenStreetMap apenas para exibição. Nenhum dado do usuário é transmitido.', p5:'O aplicativo não usa análises, SDKs de publicidade ou rastreamento de nenhum tipo.', date:'16 de março de 2026' },
+      'zh-tw': { dir:'ltr', title:'隱私政策', p1:'whatAcountry不收集、分享或出售任何個人資料。', p2:'所有問答進度和設定均儲存在您的裝置本機。', p3:'所有國家資料直接內建於應用程式中並離線載入。', p4:'地圖圖磚僅從Apple地圖和OpenStreetMap載入用於顯示目的。不傳輸任何使用者資料。', p5:'此應用程式不使用任何分析、廣告SDK或任何形式的追蹤。', date:'2026年3月16日' }
+    };
+
+    function toggleLangMenu() {
+      document.getElementById('langMenu').classList.toggle('open');
+    }
+
+    function setLang(code) {
+      const t = T[code];
+      document.getElementById('doc-title').textContent = t.title;
+      document.getElementById('p1').textContent = t.p1;
+      document.getElementById('p2').textContent = t.p2;
+      document.getElementById('p3').textContent = t.p3;
+      document.getElementById('p4').textContent = t.p4;
+      document.getElementById('p5').textContent = t.p5;
+      document.getElementById('updated-date').textContent = t.date;
+      document.querySelector('.card').setAttribute('dir', t.dir);
+      document.getElementById('langMenu').classList.remove('open');
+      document.querySelectorAll('.lang-menu button').forEach(b => {
+        b.classList.toggle('active', b.dataset.lang === code);
+      });
+    }
+
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.lang-wrap')) {
+        document.getElementById('langMenu').classList.remove('open');
+      }
+    });
+
+    (function() {
+      const full = (navigator.language || 'en').toLowerCase();
+      if (full === 'pt-br') { setLang('pt-br'); return; }
+      if (full === 'zh-tw' || full === 'zh-hk' || full === 'zh-hant') { setLang('zh-tw'); return; }
+      const lang = full.split('-')[0];
+      if (lang !== 'en' && T[lang]) setLang(lang);
+    })();
+  </script>
 </body>
 </html>
