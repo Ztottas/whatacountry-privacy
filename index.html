@@ -195,12 +195,14 @@
     }
 
     (function() {
-      const full = (navigator.language || 'en').toLowerCase();
-      if (full === 'pt-br') { setLang('pt-br'); return; }
-      if (full === 'zh-tw' || full === 'zh-hk' || full === 'zh-hant') { setLang('zh-tw'); return; }
-      const lang = full.split('-')[0];
-      if (lang !== 'en' && T[lang]) setLang(lang);
-      else resizeSelect();
+      const langs = (navigator.languages || [navigator.language || 'en']).map(l => l.toLowerCase());
+      for (const full of langs) {
+        if (full === 'pt-br' && T['pt-br']) { setLang('pt-br'); return; }
+        if (full === 'zh-tw' || full === 'zh-hk' || full === 'zh-hant') { setLang('zh-tw'); return; }
+        const base = full.split('-')[0];
+        if (T[base]) { setLang(base); return; }
+      }
+      setLang('en');
     })();
   </script>
 </body>
