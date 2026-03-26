@@ -122,21 +122,37 @@
       <div class="footer-bottom">
         <span class="updated" id="updated-date">16 March 2026</span>
         <select class="lang-select" id="langSelect" onchange="setLang(this.value)">
+        <option value="id">Bahasa Indonesia</option>
+        <option value="ms">Bahasa Melayu</option>
+        <option value="cs">Čeština</option>
+        <option value="da">Dansk</option>
         <option value="de">Deutsch</option>
         <option value="en">English</option>
         <option value="es">Español</option>
+        <option value="fil">Filipino</option>
         <option value="fr">Français</option>
         <option value="hr">Hrvatski</option>
         <option value="it">Italiano</option>
+        <option value="sw">Kiswahili</option>
         <option value="hu">Magyar</option>
         <option value="nl">Nederlands</option>
+        <option value="no">Norsk</option>
+        <option value="pl">Polski</option>
         <option value="pt-br">Português (BR)</option>
         <option value="pt">Português (PT)</option>
+        <option value="ro">Română</option>
+        <option value="fi">Suomi</option>
+        <option value="sv">Svenska</option>
         <option value="tr">Türkçe</option>
+        <option value="vi">Tiếng Việt</option>
+        <option value="el">Ελληνικά</option>
         <option value="ru">Русский</option>
+        <option value="uk">Українська</option>
         <option value="ar">العربية</option>
+        <option value="ur">اردو</option>
         <option value="fa">فارسی</option>
         <option value="hi">हिन्दी</option>
+        <option value="bn">বাংলা</option>
         <option value="th">ภาษาไทย</option>
         <option value="zh">中文（简体）</option>
         <option value="zh-tw">中文（繁體）</option>
@@ -148,6 +164,10 @@
   </div>
   <script>
     const T = {
+      id: { dir:'ltr', title:'Kebijakan Privasi', p1:'whatAcountry tidak mengumpulkan, membagikan, atau menjual data pribadi apa pun.', p2:'Semua kemajuan kuis dan pengaturan disimpan secara lokal di perangkat Anda.', p3:'Semua data negara disertakan langsung dalam aplikasi dan dimuat secara offline.', p4:'Ubin peta dimuat dari Apple Maps dan OpenStreetMap hanya untuk tampilan. Tidak ada data pengguna yang dikirim.', p5:'Aplikasi ini tidak menggunakan analitik, SDK iklan, atau pelacakan apa pun.', date:'16 Maret 2026' },
+      ms: { dir:'ltr', title:'Dasar Privasi', p1:'whatAcountry tidak mengumpul, berkongsi, atau menjual sebarang data peribadi.', p2:'Semua kemajuan kuiz dan tetapan disimpan secara setempat pada peranti anda.', p3:'Semua data negara dibundel terus dalam aplikasi dan dimuat secara luar talian.', p4:'Jubin peta dimuat dari Apple Maps dan OpenStreetMap untuk paparan sahaja. Tiada data pengguna dihantar.', p5:'Aplikasi ini tidak menggunakan analitik, SDK pengiklanan, atau penjejakan apa-apa jenis.', date:'16 Mac 2026' },
+      cs: { dir:'ltr', title:'Zásady ochrany osobních údajů', p1:'whatAcountry neshromažďuje, nesdílí ani neprodává žádné osobní údaje.', p2:'Veškerý postup v kvízu a nastavení jsou uloženy lokálně na vašem zařízení.', p3:'Všechna data o zemích jsou zabudována přímo v aplikaci a načítají se offline.', p4:'Mapové dlaždice se načítají z Apple Maps a OpenStreetMap pouze pro zobrazení. Žádné uživatelské údaje se nepřenášejí.', p5:'Aplikace nepoužívá žádnou analytiku, reklamní SDK ani sledování jakéhokoli druhu.', date:'16. března 2026' },
+      da: { dir:'ltr', title:'Privatlivspolitik', p1:'whatAcountry indsamler, deler eller sælger ingen personlige data.', p2:'Al quizfremgang og indstillinger gemmes lokalt på din enhed.', p3:'Alle landedata er samlet direkte i appen og indlæses offline.', p4:'Kortfliser indlæses fra Apple Maps og OpenStreetMap kun til visning. Ingen brugerdata overføres.', p5:'Appen bruger ingen analyser, reklame-SDK\'er eller sporing af nogen art.', date:'16. marts 2026' },
       de: { dir:'ltr', title:'Datenschutzerklärung', p1:'whatAcountry erfasst, teilt oder verkauft keine personenbezogenen Daten.', p2:'Alle Quiz-Fortschritte und Einstellungen werden lokal auf Ihrem Gerät gespeichert.', p3:'Alle Länderdaten sind direkt in der App enthalten und werden offline geladen.', p4:'Kartenkacheln werden nur zur Anzeige von Apple Maps und OpenStreetMap geladen. Es werden keine Nutzerdaten übermittelt.', p5:'Die App verwendet keinerlei Analysen, Werbe-SDKs oder Tracking.', date:'16. März 2026' },
       en: { dir:'ltr', title:'Privacy Policy', p1:'whatAcountry does not collect, share, or sell any personal data.', p2:'All quiz progress and settings are stored locally on your device.', p3:'All country data is bundled directly within the app and loaded offline.', p4:'Map tiles are loaded from Apple Maps and OpenStreetMap for display only. No user data is transmitted.', p5:'The app does not use analytics, advertising SDKs, or tracking of any kind.', date:'16 March 2026' },
       es: { dir:'ltr', title:'Política de privacidad', p1:'whatAcountry no recopila, comparte ni vende ningún dato personal.', p2:'Todo el progreso del cuestionario y la configuración se almacenan localmente en su dispositivo.', p3:'Todos los datos de países están integrados directamente en la aplicación y se cargan sin conexión.', p4:'Los mosaicos de mapa se cargan desde Apple Maps y OpenStreetMap solo para visualización. No se transmiten datos del usuario.', p5:'La aplicación no utiliza análisis, SDKs publicitarios ni seguimiento de ningún tipo.', date:'16 de marzo de 2026' },
@@ -168,6 +188,18 @@
       'zh-tw': { dir:'ltr', title:'隱私政策', p1:'whatAcountry不收集、分享或出售任何個人資料。', p2:'所有問答進度和設定均儲存在您的裝置本機。', p3:'所有國家資料直接內建於應用程式中並離線載入。', p4:'地圖圖磚僅從Apple地圖和OpenStreetMap載入用於顯示目的。不傳輸任何使用者資料。', p5:'此應用程式不使用任何分析、廣告SDK或任何形式的追蹤。', date:'2026年3月16日' },
       ja: { dir:'ltr', title:'プライバシーポリシー', p1:'whatAcountryは個人データの収集、共有、販売を一切行いません。', p2:'すべてのクイズの進行状況と設定は、デバイスにローカルで保存されます。', p3:'すべての国データはアプリに直接バンドルされており、オフラインで読み込まれます。', p4:'マップタイルはApple マップとOpenStreetMapから表示目的のみで読み込まれます。ユーザーデータは送信されません。', p5:'アプリは分析、広告SDK、いかなる種類のトラッキングも使用しません。', date:'2026年3月16日' },
       ko: { dir:'ltr', title:'개인정보 처리방침', p1:'whatAcountry는 개인 데이터를 수집, 공유 또는 판매하지 않습니다.', p2:'모든 퀴즈 진행 상황과 설정은 기기에 로컬로 저장됩니다.', p3:'모든 국가 데이터는 앱에 직접 번들로 제공되며 오프라인으로 로드됩니다.', p4:'지도 타일은 표시 목적으로만 Apple 지도와 OpenStreetMap에서 로드됩니다. 사용자 데이터는 전송되지 않습니다.', p5:'앱은 분석, 광고 SDK 또는 어떠한 종류의 추적도 사용하지 않습니다.', date:'2026년 3월 16일' },
+      fil: { dir:'ltr', title:'Patakaran sa Privacy', p1:'Ang whatAcountry ay hindi nangongolekta, nagbabahagi, o nagbebenta ng anumang personal na data.', p2:'Lahat ng progreso sa quiz at mga setting ay naka-store nang lokal sa iyong device.', p3:'Lahat ng data ng bansa ay direktang naka-bundle sa app at nilo-load nang offline.', p4:'Ang mga map tile ay nilo-load mula sa Apple Maps at OpenStreetMap para sa display lamang. Walang user data ang ipinapadala.', p5:'Ang app ay hindi gumagamit ng analytics, advertising SDK, o anumang uri ng tracking.', date:'Marso 16, 2026' },
+      sw: { dir:'ltr', title:'Sera ya Faragha', p1:'whatAcountry haikukusanyi, kushiriki, au kuuza data yoyote ya kibinafsi.', p2:'Maendeleo yote ya mchezo na mipangilio huhifadhiwa ndani ya kifaa chako.', p3:'Data zote za nchi zimejumuishwa moja kwa moja ndani ya programu na kupakiwa nje ya mtandao.', p4:'Vigae vya ramani hupakiwa kutoka Apple Maps na OpenStreetMap kwa maonyesho tu. Hakuna data ya mtumiaji inayotumwa.', p5:'Programu haitumii uchambuzi, SDK za matangazo, au ufuatiliaji wa aina yoyote.', date:'Machi 16, 2026' },
+      vi: { dir:'ltr', title:'Chính sách Bảo mật', p1:'whatAcountry không thu thập, chia sẻ hoặc bán bất kỳ dữ liệu cá nhân nào.', p2:'Tất cả tiến trình bài kiểm tra và cài đặt được lưu trữ cục bộ trên thiết bị của bạn.', p3:'Tất cả dữ liệu quốc gia được đóng gói trực tiếp trong ứng dụng và tải ngoại tuyến.', p4:'Ô bản đồ được tải từ Apple Maps và OpenStreetMap chỉ để hiển thị. Không có dữ liệu người dùng nào được truyền đi.', p5:'Ứng dụng không sử dụng phân tích, SDK quảng cáo hoặc theo dõi dưới bất kỳ hình thức nào.', date:'16 tháng 3 năm 2026' },
+      el: { dir:'ltr', title:'Πολιτική Απορρήτου', p1:'Το whatAcountry δεν συλλέγει, μοιράζεται ή πωλεί προσωπικά δεδομένα.', p2:'Όλη η πρόοδος του κουίζ και οι ρυθμίσεις αποθηκεύονται τοπικά στη συσκευή σας.', p3:'Όλα τα δεδομένα χωρών είναι ενσωματωμένα στην εφαρμογή και φορτώνονται εκτός σύνδεσης.', p4:'Τα πλακίδια χάρτη φορτώνονται από τους Χάρτες Apple και το OpenStreetMap μόνο για εμφάνιση. Δεν μεταδίδονται δεδομένα χρήστη.', p5:'Η εφαρμογή δεν χρησιμοποιεί αναλυτικά, διαφημιστικά SDK ή παρακολούθηση οποιουδήποτε είδους.', date:'16 Μαρτίου 2026' },
+      uk: { dir:'ltr', title:'Політика конфіденційності', p1:'whatAcountry не збирає, не передає та не продає жодних персональних даних.', p2:'Весь прогрес вікторини та налаштування зберігаються локально на вашому пристрої.', p3:'Усі дані про країни вбудовані безпосередньо в додаток і завантажуються офлайн.', p4:'Тайли карт завантажуються з Apple Maps та OpenStreetMap лише для відображення. Дані користувача не передаються.', p5:'Додаток не використовує аналітику, рекламні SDK або відстеження будь-якого виду.', date:'16 березня 2026 р.' },
+      pl: { dir:'ltr', title:'Polityka prywatności', p1:'whatAcountry nie zbiera, nie udostępnia ani nie sprzedaje żadnych danych osobowych.', p2:'Cały postęp w quizie i ustawienia są przechowywane lokalnie na Twoim urządzeniu.', p3:'Wszystkie dane o krajach są zawarte bezpośrednio w aplikacji i ładowane offline.', p4:'Kafelki mapy są ładowane z Apple Maps i OpenStreetMap wyłącznie do wyświetlania. Żadne dane użytkownika nie są przesyłane.', p5:'Aplikacja nie korzysta z analityki, reklamowych SDK ani żadnego rodzaju śledzenia.', date:'16 marca 2026' },
+      ro: { dir:'ltr', title:'Politica de confidențialitate', p1:'whatAcountry nu colectează, nu partajează și nu vinde date personale.', p2:'Tot progresul la test și setările sunt stocate local pe dispozitivul dvs.', p3:'Toate datele despre țări sunt incluse direct în aplicație și încărcate offline.', p4:'Plăcile de hartă sunt încărcate din Apple Maps și OpenStreetMap doar pentru afișare. Nu se transmit date ale utilizatorului.', p5:'Aplicația nu folosește analize, SDK-uri publicitare sau urmărire de niciun fel.', date:'16 martie 2026' },
+      sv: { dir:'ltr', title:'Integritetspolicy', p1:'whatAcountry samlar inte in, delar eller säljer några personuppgifter.', p2:'All quizframsteg och inställningar lagras lokalt på din enhet.', p3:'All landsdata är paketerad direkt i appen och laddas offline.', p4:'Kartplattor laddas från Apple Maps och OpenStreetMap enbart för visning. Inga användardata överförs.', p5:'Appen använder ingen analys, reklam-SDK eller spårning av något slag.', date:'16 mars 2026' },
+      fi: { dir:'ltr', title:'Tietosuojakäytäntö', p1:'whatAcountry ei kerää, jaa tai myy mitään henkilökohtaisia tietoja.', p2:'Kaikki tietovisaedistyminen ja asetukset tallennetaan paikallisesti laitteeseesi.', p3:'Kaikki maatiedot on sisällytetty suoraan sovellukseen ja ladataan offline-tilassa.', p4:'Karttaruudut ladataan Apple Mapsista ja OpenStreetMapista vain näyttämistä varten. Käyttäjätietoja ei välitetä.', p5:'Sovellus ei käytä analytiikkaa, mainos-SDK:ita tai minkäänlaista seurantaa.', date:'16. maaliskuuta 2026' },
+      no: { dir:'ltr', title:'Personvernerklæring', p1:'whatAcountry samler ikke inn, deler eller selger noen personlige data.', p2:'All quizfremgang og innstillinger lagres lokalt på enheten din.', p3:'All landsdata er samlet direkte i appen og lastes offline.', p4:'Kartfliser lastes fra Apple Maps og OpenStreetMap kun for visning. Ingen brukerdata overføres.', p5:'Appen bruker ingen analyser, reklame-SDK-er eller sporing av noe slag.', date:'16. mars 2026' },
+      bn: { dir:'ltr', title:'গোপনীয়তা নীতি', p1:'whatAcountry কোনো ব্যক্তিগত তথ্য সংগ্রহ, শেয়ার বা বিক্রি করে না।', p2:'সমস্ত কুইজ অগ্রগতি এবং সেটিংস আপনার ডিভাইসে স্থানীয়ভাবে সংরক্ষিত হয়।', p3:'সমস্ত দেশের তথ্য সরাসরি অ্যাপে অন্তর্ভুক্ত এবং অফলাইনে লোড হয়।', p4:'মানচিত্র টাইল শুধুমাত্র প্রদর্শনের জন্য Apple Maps এবং OpenStreetMap থেকে লোড করা হয়। কোনো ব্যবহারকারীর তথ্য প্রেরণ করা হয় না।', p5:'অ্যাপটি কোনো অ্যানালিটিক্স, বিজ্ঞাপন SDK বা কোনো ধরনের ট্র্যাকিং ব্যবহার করে না।', date:'১৬ মার্চ ২০২৬' },
+      ur: { dir:'rtl', title:'رازداری کی پالیسی', p1:'whatAcountry کوئی ذاتی ڈیٹا جمع، شیئر یا فروخت نہیں کرتا۔', p2:'تمام کوئز کی پیشرفت اور ترتیبات آپ کے آلے پر مقامی طور پر محفوظ ہیں۔', p3:'تمام ملکی ڈیٹا براہ راست ایپ میں شامل ہے اور آف لائن لوڈ ہوتا ہے۔', p4:'نقشے کی ٹائلیں صرف ڈسپلے کے لیے Apple Maps اور OpenStreetMap سے لوڈ کی جاتی ہیں۔ کوئی صارف ڈیٹا منتقل نہیں ہوتا۔', p5:'ایپ کوئی تجزیات، اشتہاری SDK یا کسی قسم کی ٹریکنگ استعمال نہیں کرتا۔', date:'16 مارچ 2026' },
     };
 
     function setLang(code) {
@@ -199,6 +231,8 @@
       for (const full of langs) {
         if (full === 'pt-br' && T['pt-br']) { setLang('pt-br'); return; }
         if (full === 'zh-tw' || full === 'zh-hk' || full === 'zh-hant') { setLang('zh-tw'); return; }
+        if (full === 'fil' || full === 'tl') { setLang('fil'); return; }
+        if (full.startsWith('nb') || full.startsWith('nn')) { setLang('no'); return; }
         const base = full.split('-')[0];
         if (T[base]) { setLang(base); return; }
       }
